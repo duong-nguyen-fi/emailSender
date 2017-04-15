@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender\MailSender.csproj", "{55D0CF69-AE81-4ED6-A8F4-D1D166508F49}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VamkEmail", "VamkEmail\VamkEmail.csproj", "{B9EC88B3-AB13-4899-BB3C-D627FF90741C}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55D0CF69-AE81-4ED6-A8F4-D1D166508F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55D0CF69-AE81-4ED6-A8F4-D1D166508F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55D0CF69-AE81-4ED6-A8F4-D1D166508F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55D0CF69-AE81-4ED6-A8F4-D1D166508F49}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9EC88B3-AB13-4899-BB3C-D627FF90741C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9EC88B3-AB13-4899-BB3C-D627FF90741C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9EC88B3-AB13-4899-BB3C-D627FF90741C}.Release|Any CPU.ActiveCfg = Release|Any CPU
