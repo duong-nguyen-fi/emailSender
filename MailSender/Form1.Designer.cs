@@ -103,7 +103,8 @@
             "tynshjt@gmail.com",
             "ndng96@gmail.com",
             "duongnguyen151196@gmail.com",
-            "nduong96@outlook.com"});
+            "nduong96@outlook.com",
+            "e1500948@edu.vamk.fi"});
             this.cbFrom.Location = new System.Drawing.Point(114, 25);
             this.cbFrom.Name = "cbFrom";
             this.cbFrom.Size = new System.Drawing.Size(157, 21);

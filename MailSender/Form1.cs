@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
 using MySql.Data.MySqlClient;
@@ -35,11 +29,13 @@ namespace MailSender
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            content = "";           
+            
+            content = "";  //body part of message         
             getPassWordandServer(); //generate server and password
             // head of message ex: "Dear Maria"
             head = "<h3>Dear " +Dear.Text + ",</h3>";
             signature = "<address><ul><li>Duong Nguyen </li><li>Student at Vaasa University of Applied Sciences</li><li>www.cc.puv.fi/~e1500948</li><ul></address>";
+            #region trycatch send email + format
             #region try send mail
             try
             {
@@ -48,6 +44,7 @@ namespace MailSender
             mail.From = new MailAddress(cbFrom.Text);
             mail.To.Add(cbto.Text);
             mail.Subject = subject.Text;
+
             // Seperate body line in line
             foreach (string line in body.Lines)
             {
@@ -56,44 +53,55 @@ namespace MailSender
                     content += "<h3>" + line.Trim() + "</h3>";
                 }
             }
+
             mail.Body =head + content.TrimEnd() + signature;
             mail.IsBodyHtml = true;
             
             
             Client.EnableSsl = true;
+            Client.UseDefaultCredentials = false;
             Client.Credentials = new System.Net.NetworkCredential(cbFrom.Text, pass);
             
-                Client.Send(mail);
-                MessageBox.Show("Email sent!","Success");
+            Client.Send(mail);
+            MessageBox.Show("Email sent!","Success");
             }
             #endregion try
+            #region catch send email
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+            #endregion catch 
+#endregion trycatch send email + format
+        }  // end of button click
 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        //  get password and server for SMTP
+
+
+        //  get password and serverURL for SMTP
         private void getPassWordandServer()
         {
             int id = (cbFrom.SelectedIndex);
-            String connString = "Server=localhost;database=e1500948_email;uid=root;pwd=;";
+            String connString = "Server=localhost;database=e1500948_sender;uid=root;pwd=;";
             MySqlConnection conn = new MySqlConnection(connString);
             MySqlCommand command;
+            
             command = conn.CreateCommand();
             switch (id)
             {
                 case 0:
-                    command.CommandText = "SELECT * FROM `emailSMTP` WHERE `id`='1'";
+                    command.CommandText = "SELECT * FROM `sender` WHERE `id`='1'";
                     break;
                 case 1:
-                    command.CommandText = "SELECT * FROM `emailSMTP` WHERE `id`='2'";
+                    command.CommandText = "SELECT * FROM `sender` WHERE `id`='2'";
                     break;
                 case 3:
-                    command.CommandText = "SELECT * FROM `emailSMTP` WHERE `id`='4'";
-                
+                    command.CommandText = "SELECT * FROM `sender` WHERE `id`='4'";
                     break;
-            }                   
+                case 4:
+                    command.CommandText = "SELECT * FROM `sender` WHERE `id`='5'";
+                    break;
+            }
+            #region try catch get pass server               
             try
             {
                 conn.Open();
@@ -101,7 +109,7 @@ namespace MailSender
                 reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    pass = reader["password"].ToString();
+                    pass = reader["ac"].ToString();
                     server = reader["server"].ToString();
                 }
             }
@@ -118,10 +126,11 @@ namespace MailSender
                 conn = null;    //cancle object, empty object
                 //MessageBox.Show("Close connection");
             }
-            
+            #endregion try catch get pass server
+
         } // end of getPassword
 
-        
+
 
     }
 }
